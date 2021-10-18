@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/order', [App\Http\Controllers\OrderController::class, 'index'])->name('order.form');
+Route::post('order_submit', [App\Http\Controllers\OrderController::class, 'submit'])->name('order.submit');
 
 Auth::routes();
-Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
+//Route::get('/home', [App\Http\Controllers\OrderController::class, 'index'])->name('home');
 Route::resource('dish', App\Http\Controllers\DishesController::class);
 Route::get('/logout', [LoginController::class, 'logout']);
 
